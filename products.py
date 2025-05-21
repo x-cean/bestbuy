@@ -19,10 +19,9 @@ class Product:
             raise ValueError("Product quantity cannot be negative.")
         if not isinstance(quantity, int):
             raise ValueError("Product quantity must be an integer.")
-        else:
-            self.name = name
-            self.price = price
-            self.quantity = quantity
+        self.name = name
+        self.price = price
+        self.quantity = quantity
         if self.quantity == 0:
             self.active = False
 
@@ -81,11 +80,10 @@ class Product:
             raise ValueError("Quantity must be an integer.")
         if quantity > self.quantity:
             raise ValueError("Not enough quantity in stock.")
-        else:
-            self.quantity -= quantity
-            if self.quantity == 0:
-                self.deactivate()
-            return self.price * quantity
+        self.quantity -= quantity
+        if self.quantity == 0:
+            self.deactivate()
+        return self.price * quantity
 
 
 def main():

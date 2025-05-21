@@ -1,3 +1,15 @@
+"""
+In the style check I was asked to use isinstance(), is this the most standard
+method compare to
+
+if type(quanlity) != int
+
+please? Cheers!
+
+if not isinstance(quantity, int)
+"""
+
+
 import products
 from products import Product
 
@@ -66,9 +78,9 @@ class Store:
             raise ValueError("Shopping list cannot be empty.")
         total_cost = 0
         for product, quantity in shopping_list:
-            if type(product) is not Product:
+            if not isinstance(product, Product):
                 raise TypeError("All products must be of type Product.")
-            if type(quantity) is not int:
+            if not isinstance(quantity, int):
                 raise TypeError("All quantities must be integers.")
             if product not in self.product_list or product.quantity < quantity:
                 if total_cost > 0:
