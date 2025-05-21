@@ -68,11 +68,12 @@ class Store:
         for product, quantity in shopping_list:
             if type(product) != Product:
                 raise TypeError("All products must be of type Product.")
-            if type(quantity) != int:
+            elif type(quantity) != int:
                 raise TypeError("All quantities must be integers.")
-            if product not in self.product_list or product.quantity < quantity:
-                raise ValueError("We don't have enough of this product.")
-            total_cost += product.buy(quantity)
+            elif product not in self.product_list or product.quantity < quantity:
+                raise ValueError("Error while making order! Quantity larger than what exists.")
+            else:
+                total_cost += product.buy(quantity)
         return total_cost
 
 def test_store():

@@ -23,7 +23,7 @@ best_buy = store.Store(product_list)
 
 
 def start(a_store: Store):
-    print(MENU)
+    return MENU
 
 
 def create_product_dict(a_store: Store):
@@ -47,27 +47,50 @@ def show_total_amount(a_store: Store):
 def make_an_order(a_store: Store):
     list_products(a_store)
     print("When you want to finish order, enter empty text.")
-    item_nr, item = create_product_dict(a_store).items()
+    product_dict = create_product_dict(a_store)
     shopping_list = []
     while True:
         user_input = input("Which product # do you want? ")
+        user_input_2 = input("What amount do you want? ")
         if user_input == "":
-            user_input_2 = input("What amount do you want? ")
-            if user_input_2 == "":
-                if shopping_list:
-                    print(f"Total cost: {a_store.order(shopping_list)}")
-                else:
-                    print("You didn't buy anything.")
-                break
+            if shopping_list:
+                try:
+                    print(f"Order made! Total cost: {a_store.order(shopping_list)}")
+                except Exception as e:
+                    print(e)
+            else:
+                print("You didn't buy anything.")
+            break
+        elif user_input not in product_dict:
+            print("Error adding product! ")
+        else:
+            try:
+                shopping_list.append((product_dict[user_input], int(user_input_2)))
+            except ValueError:
+                print("Error adding product! ")
+
+
+def quit_program(a_store: Store):
+    print(f"Goodbye! We hope to see you again soon!")
+    exit()
+
+
+def main():
+    while True:
+        user_input = input(start(best_buy))
+
+        menu_dict = {
+            "1": list_products,
+            "2": show_total_amount,
+            "3": make_an_order,
+            "4": quit_program
+        }
+
         try:
-            product_nr = int(user_input)
-            if product_nr in store_products:
-                quantity = int(input("Enter quantity: "))
-                shopping_list.append((store_products[product_nr], quantity))
+            menu_dict[user_input](best_buy)
+        except KeyError:
+            print()
 
 
-MENU_DICT = {"1": list_products,
-#     "2": show_total_amount,
-#     "3": make_an_order,
-#     "4": quit_program
-             }
+if __name__ == "__main__":
+    main()
