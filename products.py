@@ -1,4 +1,7 @@
 class Product:
+    """
+    Product Object, comes with name, price and quantity.
+    """
     def __init__(self, name, price, quantity):
         """
         Initiator (constructor) method.
