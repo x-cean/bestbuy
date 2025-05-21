@@ -60,9 +60,10 @@ class Product:
         Returns a string that represents the product
         """
         info = f"{self.name}, Price: {self.price:.2f}, Quantity: {self.quantity}"
-        print(info)
+        # print(info)
         return info
-        # the instruction wants a return, the demo main() wants a print, so I put both here
+        # the instruction wants a return, the given demo main() here wants a print
+        # But I only need return for main.py
 
     def buy(self, quantity) -> float:
         """
