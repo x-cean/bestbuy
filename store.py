@@ -12,7 +12,7 @@ class Store:
         if not product_list:
             raise ValueError("Store must have at least one product.")
         for product in product_list:
-            if type(product) is not Product:
+            if not isinstance(product, Product):
                 raise TypeError("All products must be of type Product.")
         self.product_list = product_list
 
@@ -20,7 +20,7 @@ class Store:
         """
         Adds new Product
         """
-        if type(product) is not Product:
+        if not isinstance(product, Product):
             raise TypeError("All products must be of type Product.")
         if product in self.product_list:
             raise ValueError("Product already exists in store.")
@@ -30,7 +30,7 @@ class Store:
         """
         Removes a Product from Store.
         """
-        if type(product) is not Product:
+        if not isinstance(product, Product):
             raise TypeError("All products must be of type Product.")
         if product not in self.product_list:
             raise ValueError("Product does not exist in store.")
@@ -59,7 +59,7 @@ class Store:
         Product (Product class) and quantity (int).
         Buys the products and returns the total price of the order.
         """
-        if type(shopping_list) is not list:
+        if not isinstance(shopping_list, list):
             raise TypeError("Shopping list must be a list of tuple with Product "
                             "objects and quantities.")
         if not shopping_list:
@@ -71,8 +71,11 @@ class Store:
             if type(quantity) is not int:
                 raise TypeError("All quantities must be integers.")
             if product not in self.product_list or product.quantity < quantity:
+                if total_cost > 0:
+                    print("Order made! Total cost: ", total_cost, " dollars.")
                 raise ValueError("Error while making order! Quantity larger than what exists.")
-            total_cost += product.buy(quantity)
+            else:
+                total_cost += product.buy(quantity)
         return total_cost
 
 def test_store():

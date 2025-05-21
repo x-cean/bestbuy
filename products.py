@@ -11,13 +11,13 @@ class Product:
         self.active = True
         if not name:
             raise ValueError("Product name cannot be an empty string.")
-        elif price < 0:
+        if price < 0:
             raise ValueError("Product price cannot be negative.")
-        elif type(price) != float and type(price) != int:
+        if not isinstance(price, float) and not isinstance(price, int):
             raise ValueError("Product price must be a number.")
-        elif quantity < 0:
+        if quantity < 0:
             raise ValueError("Product quantity cannot be negative.")
-        elif type(quantity) != int:
+        if not isinstance(quantity, int):
             raise ValueError("Product quantity must be an integer.")
         else:
             self.name = name
@@ -40,7 +40,7 @@ class Product:
         """
         if quantity < 0:
             raise ValueError("Product quantity cannot be negative.")
-        elif quantity == 0:
+        if quantity == 0:
             self.deactivate()
         else:
             self.quantity = quantity
@@ -77,9 +77,9 @@ class Product:
         """
         if quantity < 0:
             raise ValueError("Quantity cannot be negative.")
-        elif type(quantity) != int:
+        if not isinstance(quantity, int):
             raise ValueError("Quantity must be an integer.")
-        elif quantity > self.quantity:
+        if quantity > self.quantity:
             raise ValueError("Not enough quantity in stock.")
         else:
             self.quantity -= quantity
@@ -89,6 +89,9 @@ class Product:
 
 
 def main():
+    """
+    instructed tests from codio assignment
+    """
     bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
     mac = Product("MacBook Air M2", price=1450, quantity=100)
 

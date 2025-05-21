@@ -1,5 +1,4 @@
 import products
-from products import Product
 import store
 from store import Store
 
@@ -45,7 +44,7 @@ def list_products(a_store: Store):
     store_products = create_product_dict(a_store)
     print("------")
     for item_nr, item in store_products.items():
-        print(item_nr + f". {store_products[item_nr].show()}")
+        print(item_nr + f". {item.show()}")
     print("------")
 
 
@@ -72,13 +71,13 @@ def make_an_order(a_store: Store):
         if user_input == "":
             if shopping_list:
                 try:
-                    print(f"Order made! Total cost: {a_store.order(shopping_list)}")
+                    print(f"Order made! Total cost: {a_store.order(shopping_list)} dollars.")
                 except Exception as e:
                     print(e)
             else:
                 print("You didn't buy anything.")
             break
-        elif user_input not in product_dict:
+        if user_input not in product_dict:
             print("Error adding product! ")
         else:
             try:
@@ -92,7 +91,7 @@ def quit_program(a_store: Store):
     quit the program
     Store not used but this simplifies how I call the function in main, so I kept it here
     """
-    print(f"Goodbye! We hope to see you again soon!")
+    print("Goodbye! We hope to see you again soon!")
     exit()
 
 
