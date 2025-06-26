@@ -34,6 +34,8 @@ def create_product_dict(a_store: Store):
     """
     store_products = a_store.get_all_products()
     store_product_dict = {f"{i + 1}": store_products[i] for i in range(len(store_products))}
+    # optional method:
+    # enumerate: {str(i+1): prod for i, prod in enumerate(store_products)}
     return store_product_dict
 
 
