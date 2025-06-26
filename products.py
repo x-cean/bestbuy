@@ -37,12 +37,11 @@ class Product:
         Setter function for quantity.
         If the quantity reaches 0, deactivates the product.
         """
+        if quantity < 0:
+            raise ValueError("Product quantity cannot be negative.")
         self.quantity = quantity
         if quantity == 0:
             self.deactivate()
-        elif quantity < 0:
-            raise ValueError("Product quantity cannot be negative.")
-
 
     def is_active(self) -> bool:
         """
